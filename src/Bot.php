@@ -91,13 +91,22 @@ class Bot
 
         $tasks = $this->prepareTasks($tasks);
 
-        $this->http->post('sendMessage', [
-            'form_params' => [
-                'chat_id'      => $chatId,
-                'text'         => $this->prepareTexts($tasks),
-                'reply_markup' => $this->prepareButtons($tasks)
-            ]
-        ]);
+        if(count($tasks) === 0){
+            $this->http->post('sendMessage', [
+                'form_params' => [
+                    'chat_id' => $chatId,
+                    'text'    => 'No tasks found',
+                ]
+            ]);
+        } else{
+            $this->http->post('sendMessage', [
+                'form_params' => [
+                    'chat_id'      => $chatId,
+                    'text'         => $this->prepareTexts($tasks),
+                    'reply_markup' => $this->prepareButtons($tasks)
+                    ]
+                ]);
+            }
     }
 
     private function prepareTasks(array $tasks): array
