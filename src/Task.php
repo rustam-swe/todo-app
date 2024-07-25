@@ -23,7 +23,7 @@ class Task
 
     public function getAll(): false|array
     {
-        return $this->pdo->query("SELECT * FROM todos")->fetchAll();
+        return $this->pdo->query("SELECT * FROM todos")->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function complete(int $id): bool
