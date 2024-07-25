@@ -14,7 +14,7 @@ if (isset($update)) {
         return;
     }
 
-    $path = parse_url($_SERVER['REQUEST_URI'])['path'];
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
     if ($path === '/add') {
         $task->add($update->text, $update->userId);
@@ -25,19 +25,6 @@ if ($_SERVER['REQUEST_URI'] === '/tasks') {
     echo json_encode($task->getAll());
     return;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if (count($_GET) > 0 || count($_POST) > 0) {
     if (isset($_POST['text'])) {
