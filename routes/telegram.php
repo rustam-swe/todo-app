@@ -4,9 +4,9 @@ declare(strict_types=1);
 require 'config.php';
 
 /**
- * @var $token
+ * @var $config
  */
-$bot    = new Bot($token);
+$bot    = new Bot($config['telegram']['token'], $config['database']);
 $router = new Router();
 
 if (isset($router->getUpdates()->message)) {
@@ -25,7 +25,7 @@ if (isset($router->getUpdates()->message)) {
     }
 
     if ($text === "/all") {
-        $bot->getAllTasks($chatId);
+        $bot->echo($config);
         return;
     }
 

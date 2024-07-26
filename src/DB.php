@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 class DB
 {
-    public static function connect(): PDO
+    public static function connect($config): PDO
     {
-        return new PDO('mysql:host=localhost;dbname=todo_app', 'root', '1234');
+        $dsn = "{$config['db_connection']}:host={$config['db_host']};dbname={$config['db_name']};user={$config['username']};password={$config['password']}";
+        return new PDO($dsn);
     }
 }

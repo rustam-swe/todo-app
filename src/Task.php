@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+$config = require 'config.php';
+
 class Task
 {
     private PDO $pdo;
 
     public function __construct()
     {
-        $this->pdo = DB::connect();
+        global $config;
+        $this->pdo  = DB::connect($config['database']);
     }
 
     public function add(string $text, int $userId = 3): bool

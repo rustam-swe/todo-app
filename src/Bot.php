@@ -10,11 +10,12 @@ class Bot
     public Client $http;
     private PDO   $pdo;
 
-    public function __construct(string $token)
+    public function __construct(string $token, $dsn)
     {
-        $this->api = "https://api.telegram.org/bot$token/";
+        $this->api = "https://api.telegram.org/bot{$token}/";
         $this->http = new Client(['base_uri' => $this->api]);
-        $this->pdo  = DB::connect();
+
+        $this->pdo  = DB::connect($dsn);
     }
 
     public function echo($update)
