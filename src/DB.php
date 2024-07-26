@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 class DB
 {
-    public static function connect($config): PDO
+    public static function connect(): PDO
     {
-        $dsn = "{$config['db_connection']}:host={$config['db_host']};dbname={$config['db_name']};user={$config['username']};password={$config['password']}";
+        $dsn = "{$_ENV['DB_CONNECTION']}:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']};user={$_ENV['DB_USERNAME']};password={$_ENV['DB_PASSWORD']}";
         return new PDO($dsn);
     }
 }
