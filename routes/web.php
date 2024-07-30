@@ -10,15 +10,15 @@ if (count($_GET) > 0 || count($_POST) > 0) {
     }
 
     if (isset($_GET['complete'])) {
-        $task->complete($_GET['complete']);
+        $task->complete((int)$_GET['complete']);
     }
 
     if (isset($_GET['uncompleted'])) {
-        $task->uncompleted($_GET['uncompleted']);
+        $task->uncompleted((int)$_GET['uncompleted']);
     }
 
     if (isset($_GET['delete'])) {
-        $task->delete($_GET['delete']);
+        $task->delete((int)$_GET['delete']);
     }
 }
 

@@ -27,5 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
-    echo 'Resource '.$router->getResourceId().' updated';
+    if($router->getUpdates()->status === 'check'){
+        $task->uncompleted($router->getUpdates()->taskId);
+        $router->sendResponse('Unchecked');
+        return;
+    }
+
+    $task->complete($router->getUpdates()->taskId);
+    $router->sendResponse('Checked');
+    return;
+
 }
