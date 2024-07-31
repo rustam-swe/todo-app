@@ -1,9 +1,3 @@
-<?php
-$user = new User();
-
-$user->create();
-
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,19 +10,23 @@ $user->create();
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-4">
-            <form action="" method="post">
+            <form action="/register" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <a href="#">Sign in (Войти)</a>
                 <button type="submit" class="btn btn-primary">Submit (Отправить)</button>
             </form>
+
+
+
+
+
+
         </div>
     </div>
 </div>
