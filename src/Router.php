@@ -48,8 +48,8 @@ class Router
     {
         return $this->updates;
     }
-
-
+    
+    // TODO: Make static
     public function get($path, $callback): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SERVER['REQUEST_URI'] === $path) {
@@ -57,6 +57,7 @@ class Router
         }
     }
 
+    // TODO: Make static
     public function post($path, $callback): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path) {

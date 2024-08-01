@@ -10,7 +10,7 @@ class User
         $email    = $_REQUEST['email'];
         $password = $_REQUEST['password'];
 
-        $db   = DB::connect();
+        $db   = DB::connect(); // FIXME: move to constructor
         $stmt = $db->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
@@ -24,13 +24,13 @@ class User
             exit();
         }
 
-        echo 'Email or password is incorrect';
+        echo 'Email or password is incorrect'; // FIXME: Show on the login page
     }
 
     public function register()
     {
         if ($this->isUserExists()) {
-            echo "User already exists";
+            echo "User already exists"; // FIXME: Show on the register
             return;
         }
 
@@ -62,7 +62,7 @@ class User
             $db   = DB::connect();
             $stmt = $db->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':password', $password); // FIXME: hash password
             $stmt->execute();
 
             // Fetch last created user
@@ -70,7 +70,7 @@ class User
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC); // FIXME: Move mode into options
         }
     }
 }
