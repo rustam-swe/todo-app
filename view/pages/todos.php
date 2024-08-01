@@ -13,11 +13,11 @@
         <div class="col-8">
             <h1 class="my-5">The Best TODO App ever</h1>
             <?php
-            require 'todo-list.php';
+            require 'view/todo-list.php';
 
             echo "<hr class='border border-2 opacity-50'>";
 
-            require 'new-todo-form.php';
+            require 'view/new-todo-form.php';
             ?>
         </div>
     </div>

@@ -23,9 +23,21 @@ if (count($_GET) > 0 || count($_POST) > 0) {
     }
 }
 
-$router->get('/', fn() => require 'view/pages/home.php');
+$router->get('/', fn () => require 'view/pages/home.php');
 $router->get('/todos', fn() => require 'view/pages/todos.php');
 $router->get('/notes', fn() => require 'view/pages/notes.php');
 $router->get('/login', fn() => require 'view/pages/auth/login.php');
 $router->get('/register', fn() => require 'view/pages/auth/register.php');
-$router->post('/register', fn() => (new User())->create());
+$router->post('/register', fn() => (new User())->register());
+
+/**
+ * Registration process:
+ * 1. Create a user
+ * 1.1. Check if user exists
+ * 1.1.1. If true => Show error message
+ * 1.2. Create a new user
+ * 2. Login user
+ * 3. Redirect to profile
+ * 4.
+ */
+
