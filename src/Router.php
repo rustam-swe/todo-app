@@ -48,12 +48,13 @@ class Router
     {
         return $this->updates;
     }
-    
+
     // TODO: Make static
     public function get($path, $callback): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SERVER['REQUEST_URI'] === $path) {
             $callback();
+            exit();
         }
     }
 
@@ -62,14 +63,18 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path) {
             $callback();
+            exit();
         }
     }
 
-    public function notFound()
+    /**
+     * FIXME: Change method name and make it universal
+     * @return void
+     */
+    public function notFound(): void
     {
         http_response_code(404);
-        require  'view/pages/404.php';
+        require 'view/pages/404.php';
+        exit();
     }
-
-
 }
