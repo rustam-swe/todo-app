@@ -65,5 +65,11 @@ class Router
         }
     }
 
+    public function notFound()
+    {
+        http_response_code(404);
+        require  'view/pages/404.php';
+    }
+
 
 }

@@ -36,7 +36,7 @@ $router->get('/logout', fn() => (new User())->logout());
 $router->get('/register', fn() => require 'view/pages/auth/register.php');
 $router->post('/register', fn() => (new User())->register());
 
-
+$router->notFound();
 /**
  * Registration process:
  * 1. Create a user
