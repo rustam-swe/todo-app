@@ -1,4 +1,8 @@
-<!doctype html>
+<?php
+if (!isset($_SESSION['user'])) {
+    header('Location: /login');
+}
+?><!doctype html>
 <html lang="en">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -7,11 +11,13 @@
     <title>TODO App</title>
 </head>
 <body>
-<?php require 'view/partials/navbar.php'; ?>
+<?php
+require 'view/partials/navbar.php'; ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-            <h1 class="my-5">The Best TODO App ever</h1>
+            <h1 class="my-5">Hello, <?php
+                echo $_SESSION['user'] ?? 'Guest'; ?></h1>
             <?php
             require 'view/todo-list.php';
 

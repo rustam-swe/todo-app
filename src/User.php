@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use JetBrains\PhpStorm\NoReturn;
+
 class User
 {
 
@@ -25,6 +27,13 @@ class User
         }
 
         echo 'Email or password is incorrect'; // FIXME: Show on the login page
+    }
+
+    public function logout(): void
+    {
+        session_destroy();
+        header('Location: /');
+        exit();
     }
 
     public function register()

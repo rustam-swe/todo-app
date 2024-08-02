@@ -10,9 +10,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/todos">Todo list</a>
-                </li>
+                <?php
+                if (isset($_SESSION['user'])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/todos">Todo list</a>
+                    </li>
+                <?php
+                endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/notes">Notes</a>
                 </li>
@@ -22,7 +26,10 @@
                 <a href="/login" class="btn btn-outline-primary mx-2">Login</a>
                 <a href="/register" class="btn btn-outline-success">Register</a>
             <?php
-            else: echo $_SESSION['user'];
+            else: {
+                echo $_SESSION['user'];
+                echo "<a href='/logout' class='ms-2 text-underlined'>Logout</a>";
+            }
             endif; ?>
         </div>
     </div>
