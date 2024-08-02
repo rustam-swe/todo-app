@@ -2,18 +2,21 @@
 
 declare(strict_types=1);
 
-use JetBrains\PhpStorm\NoReturn;
-
 class User
 {
+    private PDO $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = DB::connect();
+    }
 
     public function login(): void
     {
         $email    = $_REQUEST['email'];
         $password = $_REQUEST['password'];
 
-        $db   = DB::connect(); // FIXME: move to constructor
-        $stmt = $db->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->execute();
@@ -53,8 +56,7 @@ class User
     {
         if (isset($_POST['email'])) {
             $email = $_POST['email'];
-            $db    = DB::connect();
-            $stmt  = $db->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt  = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
             return (bool) $stmt->fetch();
@@ -68,14 +70,13 @@ class User
             $email    = $_POST['email'];
             $password = $_POST['password'];
 
-            $db   = DB::connect();
-            $stmt = $db->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+            $stmt = $this->pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $password); // FIXME: hash password
             $stmt->execute();
 
             // Fetch last created user
-            $stmt = $db->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
