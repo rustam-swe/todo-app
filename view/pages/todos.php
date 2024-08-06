@@ -17,7 +17,7 @@ require 'view/partials/navbar.php'; ?>
     <div class="row justify-content-center">
         <div class="col-8">
             <h1 class="my-5">Hello, <?php
-                echo $_SESSION['user'] ?? 'Guest'; ?></h1>
+                echo $_SESSION['user']['email'] ?? 'Guest'; ?></h1>
             <?php
             require 'view/todo-list.php';
 

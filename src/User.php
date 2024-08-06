@@ -24,7 +24,10 @@ class User
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $_SESSION['user'] = $user['email'];
+            $_SESSION['user'] = [
+                'email' => $user['email'],
+                'id'    => $user['id'],
+            ];
             unset($_SESSION['message']['error']);
             header('Location: /');
             exit();
@@ -50,7 +53,10 @@ class User
 
         $user = $this->create();
 
-        $_SESSION['user'] = $user['email'];
+        $_SESSION['user'] = [
+            'email' => $user['email'],
+            'id'    => $user['id'],
+        ];
         header('Location: /');
     }
 

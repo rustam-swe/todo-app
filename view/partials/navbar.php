@@ -27,8 +27,18 @@
                 <a href="/register" class="btn btn-outline-success">Register</a>
             <?php
             else: {
-                echo $_SESSION['user'];
+                echo $_SESSION['user']['email'];
                 echo "<a href='/logout' class='ms-2 text-underlined'>Logout</a>";
+                $token = rand(1000000000, 9999999999);
+
+                // FIXME: Get rid off db connection
+                $db = DB::connect();
+                $stmt = $db->prepare("UPDATE users SET temp_token = :token WHERE email = :email");
+                $stmt->bindParam(':token', $token);
+                $stmt->bindParam(':email', $_SESSION['user']['email']);
+                $stmt->execute();
+
+                echo "<a href='https://t.me/{$_ENV['BOT_USERNAME']}?start=$token' class='ms-2 text-underlined'>Connect to telegram</a>";
             }
             endif; ?>
         </div>

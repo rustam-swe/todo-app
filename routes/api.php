@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $newTask      = $task->add($router->getUpdates()->text, 35);
+    $newTask      = $task->add($router->getUpdates()->text, $_SESSION['user']['id']);
     $responseText = $newTask ? 'New task has been added' : 'Something went wrong';
     $router->sendResponse($responseText);
 

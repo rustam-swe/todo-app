@@ -8,7 +8,7 @@ class Task
 
     public function __construct()
     {
-        $this->pdo  = DB::connect();
+        $this->pdo = DB::connect();
     }
 
     public function add(string $text, int $userId = 3): bool
@@ -23,7 +23,12 @@ class Task
 
     public function getAll(): false|array
     {
-        return $this->pdo->query("SELECT * FROM todos")->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $_SESSION['user']['email']);
+        $stmt->execute();
+        $userId = $stmt->fetchColumn();
+
+        return $this->pdo->query("SELECT * FROM todos WHERE user_id = $userId")->fetchAll();
     }
 
     public function complete(int $id): bool

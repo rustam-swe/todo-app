@@ -10,8 +10,8 @@ if (isset($router->getUpdates()->message)) {
     $chatId  = $message->chat->id;
     $text    = $message->text;
 
-    if ($text === "/start") {
-        $bot->handleStartCommand($chatId);
+    if (str_contains($text, "/start")) {
+        $bot->handleStartCommand($chatId, $text);
         return;
     }
 

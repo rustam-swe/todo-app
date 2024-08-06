@@ -18,8 +18,15 @@ class Bot
         $this->pdo  = DB::connect();
     }
 
-    public function handleStartCommand(int $chatId): void
+    public function handleStartCommand(int $chatId, string $text): void
     {
+        $token = explode('/start ', $text)[1];
+
+        $stmt = $this->pdo->prepare("UPDATE users SET chat_id = :chatId WHERE temp_token = :token");
+        $stmt->bindParam(':chatId', $chatId);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+
         $this->http->post('sendMessage', [
             'form_params' => [
                 'chat_id' => $chatId,
