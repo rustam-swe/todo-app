@@ -51,7 +51,7 @@ class Router
 
     public static function get($path, $callback): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && parse_url($_SERVER['REQUEST_URI'])['path'] === $path) {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $path) {
             $callback();
             exit();
         }
@@ -64,15 +64,13 @@ class Router
             exit();
         }
     }
-
-    /**
-     * FIXME: Change method name and make it universal
-     * @return void
-     */
-    public static function notFound(): void
+    public static function errorResponse(int $code, $message='Error bad request'): void
     {
-        http_response_code(404);
-        require 'view/pages/404.php';
+        http_response_code($code);
+        if($code == 404){
+            require 'view/pages/404.php';
+        }
+        echo json_encode(['ok'=>false, 'code'=>$code, 'message'=>$message]);
         exit();
     }
 }

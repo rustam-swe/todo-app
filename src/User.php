@@ -25,11 +25,12 @@ class User
 
         if ($user) {
             $_SESSION['user'] = $user['email'];
+            unset($_SESSION['message']['error']);
             header('Location: /');
             exit();
         }
-
-        echo 'Email or password is incorrect'; // FIXME: Show on the login page
+        $_SESSION['message']['error'] = "Wrong email or password";
+        header('Location: /login');
     }
 
     public function logout(): void
@@ -42,7 +43,8 @@ class User
     public function register()
     {
         if ($this->isUserExists()) {
-            echo "User already exists"; // FIXME: Show on the register
+            $_SESSION['message']['error'] = "User already exists";
+            header('Location: /register');
             return;
         }
 
